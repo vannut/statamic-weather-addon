@@ -1,0 +1,29 @@
+{
+    "name": "vannut/statamic-climacell-addon",
+    "description": "Minimalistic wrapper around the Climacell Wheater API v4",
+    "type": "statamic-addon",
+    "autoload": {
+        "psr-4": {
+            "Vannut\\StatamicClimacell\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Richard Verbruggen"
+        }
+    ],
+    "support": {
+        "email": "support@vannut.nl"
+    },
+    "extra": {
+        "statamic": {
+            "name": "Climacell",
+            "description": "Voeg Vloot toe aan Statamic"
+        },
+        "laravel": {
+            "providers": [
+                "Vannut\\StatamicClimacell\\ServiceProvider"
+            ]
+        }
+    }
+}
