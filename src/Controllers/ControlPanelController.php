@@ -1,11 +1,11 @@
 <?php
 
-namespace Vannut\StatamicClimacell\Controllers;
+namespace Vannut\StatamicWeather\Controllers;
 
 use Statamic\Http\Controllers\CP\CpController;
 use Statamic\Facades\Blueprint;
 use Illuminate\Http\Request;
-use Vannut\StatamicClimacell\Settings;
+use Vannut\StatamicWeather\Settings;
 
 class ControlPanelController extends CpController
 {
@@ -28,7 +28,7 @@ class ControlPanelController extends CpController
             ->preProcess();
 
         // The vue component will need these three values at a minimum.
-        return view('vloot::settings', [
+        return view('weather::settings', [
             'blueprint' => $this->settings->blueprint->toPublishArray(),
             'values'    => $fields->values(),
             'meta'      => $fields->meta(),

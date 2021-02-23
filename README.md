@@ -1,1 +1,1 @@
-# ClimaCell weather API
+# Weather API

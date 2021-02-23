@@ -1,10 +1,10 @@
 {
-    "name": "vannut/statamic-climacell-addon",
-    "description": "Minimalistic wrapper around the Climacell Wheater API v4",
+    "name": "vannut/statamic-weather-addon",
+    "description": "Get weather for a location",
     "type": "statamic-addon",
     "autoload": {
         "psr-4": {
-            "Vannut\\StatamicClimacell\\": "src"
+            "Vannut\\StatamicWeather\\": "src"
         }
     },
     "authors": [
@@ -17,12 +17,12 @@
     },
     "extra": {
         "statamic": {
-            "name": "Climacell",
-            "description": "Voeg Vloot toe aan Statamic"
+            "name": "Weather",
+            "description": "Voeg Weer toe aan Statamic"
         },
         "laravel": {
             "providers": [
-                "Vannut\\StatamicClimacell\\ServiceProvider"
+                "Vannut\\StatamicWeather\\ServiceProvider"
             ]
         }
     }

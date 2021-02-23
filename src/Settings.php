@@ -1,5 +1,5 @@
 <?php
-namespace Vannut\StatamicClimacell;
+namespace Vannut\StatamicWeather;
 
 use Statamic\Facades\Blueprint;
 use Illuminate\Support\Collection;
@@ -10,7 +10,7 @@ class Settings
 
     public $blueprint;
     private $values;
-    private $settingsFileName = 'climacell_settings.json';
+    private $settingsFileName = 'weather_settings.json';
 
     public function __construct()
     {
@@ -29,6 +29,16 @@ class Settings
                     'type' => 'text',
                     'validate' => 'required',
                     'width' => 100,
+                ],
+                'lat' => [
+                    'type' => 'text',
+                    'validate' => 'required',
+                    'width' => 50,
+                ],
+                'lon' => [
+                    'type' => 'text',
+                    'validate' => 'required',
+                    'width' => 50,
                 ],
 
 

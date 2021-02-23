@@ -1,12 +1,12 @@
 @extends('statamic::layout')
-@section('title', 'Climacell settings')
+@section('title', 'Weather settings')
 @section('wrapper_class', 'max-w-md ml-0')
 
 @section('content')
 
     <publish-form
-        title="ClimaCell api settings"
-        action="{{ cp_route('climacell.settings.update') }}"
+        title="Weather api settings"
+        action="{{ cp_route('weather.settings.update') }}"
         :blueprint='@json($blueprint)'
         :meta='@json($meta)'
         :values='@json($values)'
