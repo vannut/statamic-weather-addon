@@ -22,7 +22,7 @@ class Forecast extends \Statamic\Tags\Tags
                 $item['uvi_color'] = $this->UVIndexToColor($item['uvi']);
                 return $item;
             });
-dd($daily);
+
         return $daily;
     }
 
