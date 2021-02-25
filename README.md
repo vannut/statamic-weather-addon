@@ -5,7 +5,7 @@ This addon delivers a simple way to add a weatherforecast to you Rad Statamic We
 > This is still a very early work in progress! Find something broken or missing: make an issue!
 
 ## OpenWeatherMap
-The weather data is coming from the OpenWeatherMap api. Especially the (One-Call API)[https://openweathermap.org/api/one-call-api] which delivers all the relevant data in _one call_. And to make it even better: It's free for the first 1,000,000 calls/month (or 60 calls/minute)
+The weather data is coming from the OpenWeatherMap api. Especially the [One-Call API](https://openweathermap.org/api/one-call-api) which delivers all the relevant data in _one call_. And to make it even better: It's free for the first 1,000,000 calls/month (or 60 calls/minute)
 
 ## How to use
 1 - Create an account, register an application and copy over the appid in the settings form.
