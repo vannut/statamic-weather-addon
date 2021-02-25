@@ -13,9 +13,9 @@ class ServiceProvider extends AddonServiceProvider
     ];
 
     protected $tags = [
+        \Vannut\StatamicWeather\Tags\Forecast::class,
     ];
-    // protected $modifiers = [
-    // ];
+
     protected $commands = [
         \Vannut\StatamicWeather\Commands\FetchForecast::class
     ];
@@ -23,14 +23,6 @@ class ServiceProvider extends AddonServiceProvider
     {
         $schedule->command('weather:fetchForecast')->hourly();
     }
-
-
-    // protected $middlewareGroups = [
-    //     'statamic.cp.authenticated' => [
-    //     ],
-    //     'web' => [
-    //     ],
-    // ];
 
     public function boot()
     {

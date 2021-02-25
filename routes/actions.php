@@ -8,8 +8,6 @@ Route::namespace('\Vannut\StatamicWeather\Controllers')
         Route::get(
             '/today',
             'ApiController@today'
-        )->name('.vandaag');
-
-
+        )->name('.today');
 
     });

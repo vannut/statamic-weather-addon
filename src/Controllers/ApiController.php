@@ -11,22 +11,9 @@ use Statamic\Http\Controllers\CP\CpController;
 
 class ApiController extends CpController
 {
-
-
-    public function today() :Collection
+    public function today(): Collection
     {
-        // $nu = date('Y-m-d');
-        // $jsonObject = json_decode(Storage::get('hetweer-forecast.json'), true);
-
-        // $timeline = collect($jsonObject['data']['timelines'][0]['intervals'])
-        //     ->first(function ($interval) use ($nu) {
-        //         return Str::startsWith($interval['startTime'], $nu);
-        //     })
-        //     ;
-
-
-        // return collect($timeline['values']);
-
-
+        $jsonObject = json_decode(Storage::get('weather-forecast.json'), true);
+        return collect($jsonObject['current']);
     }
 }

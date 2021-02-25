@@ -1,9 +1,9 @@
 <?php
 namespace Vannut\StatamicWeather;
 
+use Storage;
 use Statamic\Facades\Blueprint;
 use Illuminate\Support\Collection;
-use Storage;
 
 class Settings
 {
@@ -22,8 +22,8 @@ class Settings
                     'type' => 'text',
                     'validate' => 'required',
                     'width' => 100,
-                    'default' => 'https://data.climacell.co/v4/',
-                    'placeholder' => 'https://data.climacell.co/v4/'
+                    'default' => 'https://api.met.no/weatherapi/locationforecast/2.0/',
+                    'placeholder' => 'https://api.met.no/weatherapi/locationforecast/2.0'
                 ],
                 'api_secret_key' => [
                     'type' => 'text',
