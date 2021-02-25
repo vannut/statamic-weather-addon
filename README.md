@@ -1,6 +1,6 @@
 # Weather
 
-This addon delivers a simple way to add a weatherforecast to you Rad Statamic Website.
+This addon delivers a simple way to add a weatherforecast to your Rad Statamic Website.
 
 > This is still a very early work in progress! Find something broken or missing: make an issue!
 

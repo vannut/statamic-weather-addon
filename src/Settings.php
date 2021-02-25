@@ -22,8 +22,8 @@ class Settings
                     'type' => 'text',
                     'validate' => 'required',
                     'width' => 100,
-                    'default' => 'https://api.met.no/weatherapi/locationforecast/2.0/',
-                    'placeholder' => 'https://api.met.no/weatherapi/locationforecast/2.0'
+                    'default' => 'https://api.openweathermap.org/data/2.5/',
+                    'placeholder' => 'https://api.openweathermap.org/data/2.5/'
                 ],
                 'api_secret_key' => [
                     'type' => 'text',
