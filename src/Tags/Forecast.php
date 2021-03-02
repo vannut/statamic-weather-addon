@@ -20,6 +20,7 @@ class Forecast extends \Statamic\Tags\Tags
                 $item['wind_compass'] = $this->degreeesToWindDirection($item['wind_deg'], $locale);
                 $item['wind_bft'] = $this->msToBft($item['wind_speed']);
                 $item['uvi_color'] = $this->UVIndexToColor($item['uvi']);
+                $item['uvi_percentage'] = $this->UVIndexToPercentage($item['uvi']);
                 return $item;
             });
 
@@ -66,6 +67,13 @@ class Forecast extends \Statamic\Tags\Tags
         else if($ms < 28.5)  { return 10;}
         else if($ms < 32.6)  { return 11;}
         else { return 12;}
+    }
+    private function UVIndexToPercentage($index): int {
+        $per = round(( $index / 10 ) * 100);
+        if ($per > 100) {
+            $per = 100;
+        }
+        return $per;
     }
     private function UVIndexToColor($index): String
     {
