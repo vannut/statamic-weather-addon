@@ -21,6 +21,7 @@ class Forecast extends \Statamic\Tags\Tags
                 $item['wind_bft'] = $this->msToBft($item['wind_speed']);
                 $item['uvi_color'] = $this->UVIndexToColor($item['uvi']);
                 $item['uvi_percentage'] = $this->UVIndexToPercentage($item['uvi']);
+                $item['pop_per'] = $item['pop'] * 100;
                 return $item;
             });
 
@@ -41,6 +42,7 @@ class Forecast extends \Statamic\Tags\Tags
                 'W', 'WNW', 'NW', 'NNW',
                 'N'
             ];
+
         } else {
             return [
                 'N', 'NNE', 'NE', 'ENE',
