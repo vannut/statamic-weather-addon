@@ -14,6 +14,7 @@ class ServiceProvider extends AddonServiceProvider
 
     protected $tags = [
         \Vannut\StatamicWeather\Tags\Forecast::class,
+        \Vannut\StatamicWeather\Tags\CurrentWeather::class,
     ];
 
     protected $commands = [

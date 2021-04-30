@@ -54,5 +54,42 @@ Use it to loop over the daily forecast. Depending on the location you will get a
     {{ wind_compass }} Converted wind direction to N/S/SSW etc
     {{ wind_bft }} Wind speed in Beaufort
     {{ uvi_color }} Color representation of  the UV Index
+    {{ uvi_percentage }} Percentage where UVI 10 = 100%;
 {{ /forecast }}
 ```
+
+## Current weather conditions
+
+```
+{{  current_weather }}
+    {{ dt }}
+    {{ sunrise }}
+    {{ sunset }}
+
+    {{  temp }}
+    {{ feels_like }}
+
+    {{ pressure }} HPa
+    {{ humidty }} %
+    {{ dew_point }} Celcius
+
+    {{ uvi }} UV Index
+    {{ clouds }}
+    {{  visibility }}
+
+    {{ wind_speed }} in m/s
+    {{ wind_gust }} in m/s
+    {{ wind_deg }} in degrees
+
+    {{  weather.0.id }}
+    {{  weather.0.main }}
+    {{  weather.0.description }}
+    {{  weather.0.icon }}
+
+    These are additions added by the addon:<br>
+    {{ icon }} A fontawesome icon derived fron weather.0.icon
+    {{ wind_compass }} Converted wind direction to N/S/SSW etc
+    {{ wind_bft }} Wind speed in Beaufort
+    {{ uvi_color }} Color representation of  the UV Index
+    {{ uvi_percentage }} Percentage where UVI 10 = 100%;
+{{ /current_weather }}
