@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class Forecast extends \Statamic\Tags\Tags
 {
-    use \Vannut\StatamicWeather\Conversiontrait;
+    use \Vannut\StatamicWeather\ConversionTrait;
 
     // {{ forecast locale="nl" }} {{ /forecast }}
     public function index(): Collection

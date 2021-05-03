@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class CurrentWeather extends \Statamic\Tags\Tags
 {
-    use \Vannut\StatamicWeather\Conversiontrait;
+    use \Vannut\StatamicWeather\ConversionTrait;
 
     protected static $aliases = ['current_weather'];
 
