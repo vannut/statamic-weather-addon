@@ -40,6 +40,16 @@ class Settings
                     'validate' => 'required',
                     'width' => 50,
                 ],
+                'units' => [
+                    'validate' => 'required',
+                    'width' => 50,
+                    'type' => 'select',
+                    'default' => 'metric',
+                    'options' => [
+                        'metric' => 'Metric (Celcius, meter/s)',
+                        'imperial' => 'Imperial (Fahrenheit, miles/hour)',
+                    ]
+                ],
 
 
         ]);

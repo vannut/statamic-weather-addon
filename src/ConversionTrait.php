@@ -29,6 +29,23 @@ trait ConversionTrait {
         }
     }
 
+    private function mphToBft($mph): Int
+    {
+        if ($mph < 1)      { return 0; }
+        else if($mph < 4)  { return 1;}
+        else if($mph < 8)  { return 2;}
+        else if($mph < 13)  { return 3;}
+        else if($mph < 19)    { return 4;}
+        else if($mph < 25)  { return 5;}
+        else if($mph < 32)  { return 6;}
+        else if($mph < 39)  { return 7;}
+        else if($mph < 47)  { return 8;}
+        else if($mph < 54)  { return 9;}
+        else if($mph < 64)  { return 10;}
+        else if($mph < 73)  { return 11;}
+        else { return 12;}
+    }
+
     private function msToBft($ms): Int
     {
         if ($ms < 0.3)      { return 0; }
@@ -45,7 +62,8 @@ trait ConversionTrait {
         else if($ms < 32.6)  { return 11;}
         else { return 12;}
     }
-    private function UVIndexToPercentage($index): int {
+    private function UVIndexToPercentage($index): int
+    {
         $per = round(( $index / 10 ) * 100);
         if ($per > 100) {
             $per = 100;

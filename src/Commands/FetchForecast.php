@@ -46,7 +46,7 @@ class FetchForecast extends Command
             .'onecall?lat='.$this->config->get('lat')
             .'&lon='.$this->config->get('lon')
             .'&exclude=minutely,hourly,alerts'
-            .'&units=metric'
+            .'&units='.$this->config->get('units', 'metric')
             .'&appid='.$this->config->get('api_secret_key');
 
 
