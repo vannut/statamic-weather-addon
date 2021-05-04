@@ -88,3 +88,9 @@ Want to display the current weather of your location? Use the `{{ current_weathe
         </div>
     {{ /current_weather }}
 ```
+
+---
+<p>
+<a href="https://statamic.com"><img src="https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge" alt="Compatible with Statamic v3"></a>
+<a href="https://packagist.org/packages/vannut/statamic-weather-addon/stats"><img src="https://img.shields.io/packagist/v/vannut/statamic-weather-addon?style=for-the-badge" alt="Addon on Packagist"></a>
+</p>
