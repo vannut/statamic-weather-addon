@@ -47,7 +47,8 @@ class FetchForecast extends Command
             .'&lon='.$this->config->get('lon')
             .'&exclude=minutely,hourly,alerts'
             .'&units='.$this->config->get('units', 'metric')
-            .'&appid='.$this->config->get('api_secret_key');
+            .'&appid='.$this->config->get('api_secret_key')
+            .'&lang='.$this->config->get('lang','en');
 
 
         $headers = [
