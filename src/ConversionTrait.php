@@ -17,7 +17,14 @@ trait ConversionTrait {
                 'W', 'WNW', 'NW', 'NNW',
                 'N'
             ];
-
+	} elseif ($locale == 'de') {
+            return [
+                'N', 'NNO', 'NO', 'ONO',
+                'O', 'OSO', 'SO', 'SSO',
+                'S', 'SSW', 'SW', 'WSW',
+                'W', 'WNW', 'NW', 'NNW',
+                'N'
+            ];
         } else {
             return [
                 'N', 'NNE', 'NE', 'ENE',
