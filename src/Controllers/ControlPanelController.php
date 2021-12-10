@@ -2,10 +2,14 @@
 
 namespace Vannut\StatamicWeather\Controllers;
 
-use Statamic\Http\Controllers\CP\CpController;
-use Statamic\Facades\Blueprint;
+use Storage;
 use Illuminate\Http\Request;
+use Statamic\Facades\CP\Toast;
+use Statamic\Facades\Blueprint;
 use Vannut\StatamicWeather\Settings;
+use Illuminate\Support\Facades\Artisan;
+use Statamic\Http\Controllers\CP\CpController;
+use Vannut\StatamicWeather\Actions\FetchAndStoreAction;
 
 class ControlPanelController extends CpController
 {
@@ -15,6 +19,25 @@ class ControlPanelController extends CpController
     {
         $this->settings = new Settings;
     }
+
+    public function currentData() 
+    {   
+
+        if (Storage::exists('weather-forecast.json')) {
+            
+            $json = json_encode(
+                json_decode(Storage::get('weather-forecast.json')),
+                JSON_PRETTY_PRINT
+            );
+        } else {
+            $json = false;
+        }
+
+        return view('weather::current_data', [
+            'json' => $json
+        ]);
+    }
+
     public function index()
     {
 
@@ -59,7 +82,19 @@ class ControlPanelController extends CpController
     }
 
 
+    public function fetchWeather()
+    {
+        
+        $success = (new FetchAndStoreAction($this->settings->get()))->execute();
 
+        if ($success) {
+            Toast::success('Data updated');
+        } else {
+            Toast::error('Something went wrong');
+        }
+        return redirect()->back();
+        
+    }
 
 
 
