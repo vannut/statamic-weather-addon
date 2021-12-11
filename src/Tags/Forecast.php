@@ -11,7 +11,7 @@ class Forecast extends \Statamic\Tags\Tags
     use \Vannut\StatamicWeather\ConversionTrait;
 
     // {{ forecast locale="nl" }} {{ /forecast }}
-    public function index(): Collection
+    public function index(): array
     {
         $locale = strtolower($this->params->get('locale'));
         $config = (new Settings)->get();
@@ -34,7 +34,10 @@ class Forecast extends \Statamic\Tags\Tags
                 return $item;
             });
 
-        return $daily;
+        return [
+            'fetched_at' => $json['fetched_at'],
+            'days' => $daily
+        ];
     }
 
 

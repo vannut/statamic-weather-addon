@@ -33,38 +33,47 @@ Next to the data provided by the API, the addon adds a couple of nice additional
 {{ wind_bft }}       Wind speed in Beaufort
 {{ uvi_color }}      Color representation of  the UV Index
 {{ uvi_percentage }} Percentage where UVI 10 = 100%;
+{{ fetched_at }}     Unix Epoch timestamp of the datetime when fetched from API
 ```
 
 You'll have two tags to your disposal: `{{ forecast }}` and `{{ current_weather }}`
 
 ## Simple 7 day forecast
-The `{{ forecast }}` tag is an array of days which you can traverse to display weather-cards.
+With the `{{ forecast }}` tag you will be able to display a card per day with the forecast. 
+This data is located in the `days` array which you can traverse and add your styling magic. 
+
+This is a very simple example: 
 ```html
 <div class="flex bg-neutral-100">
     {{ forecast :locale="site" }}
-        <div class="rounded-xl bg-white">
-            <div class="lining-nums p-4 text-center">
-                {{ dt format_localized="%A" }}<br>
-                {{ dt format_localized="%e %b %Y"  }}
-            </div>
-            <div class="pb-4 text-5xl flex justify-center">
-                <i class="fal {{ icon }}"></i>
-            </div>
-            <div class="pb-2 flex items-center justify-center">
-                <div>
-                    {{ temp.max | round }}<span class="text-neutral-700">&deg;C</span>
+        {{ days }}
+            <div class="rounded-xl bg-white">
+                <div class="lining-nums p-4 text-center">
+                    {{ dt format_localized="%A" }}<br>
+                    {{ dt format_localized="%e %b %Y"  }}
                 </div>
-                <div class="text-sm">
-                    <span class="text-neutral-700">&nbsp;&nbsp; / </span>
-                    {{ temp.min | round }}<span class="text-neutral-700">&deg;C</span>
+                <div class="pb-4 text-5xl flex justify-center">
+                    <i class="fal {{ icon }}"></i>
+                </div>
+                <div class="pb-2 flex items-center justify-center">
+                    <div>
+                        {{ temp.max | round }}<span class="text-neutral-700">&deg;C</span>
+                    </div>
+                    <div class="text-sm">
+                        <span class="text-neutral-700">&nbsp;&nbsp; / </span>
+                        {{ temp.min | round }}<span class="text-neutral-700">&deg;C</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center pb-4">
+                    <div>
+                        <i class="fal fa-wind"></i>
+                        {{ wind_compass }} {{ wind_bft  }}<span class="text-neutral-700">Bft</span>
+                    </div>
                 </div>
             </div>
-            <div class="flex items-center justify-center pb-4">
-                <div>
-                    <i class="fal fa-wind"></i>
-                    {{ wind_compass }} {{ wind_bft  }}<span class="text-neutral-700">Bft</span>
-                </div>
-            </div>
+        {{ /days }}
+        <div>
+            Forecast feched at: {{ fetched_at format_localized="%e %b %Y %H:%M" }} server time
         </div>
     {{/forecast }}
 </div>

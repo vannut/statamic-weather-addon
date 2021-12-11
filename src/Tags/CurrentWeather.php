@@ -31,6 +31,8 @@ class CurrentWeather extends \Statamic\Tags\Tags
         $current['uvi_color'] = $this->UVIndexToColor($current['uvi']);
         $current['uvi_percentage'] = $this->UVIndexToPercentage($current['uvi']);
 
+        $current['fetched_at'] = $json['fetched_at'];
+        
         return $current;
     }
 }
