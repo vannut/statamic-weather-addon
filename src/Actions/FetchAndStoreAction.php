@@ -30,7 +30,7 @@ class FetchAndStoreAction {
         }
 
         // add the fetch time
-        $jsonObj = array_merge(["fetched_at" => now()->format('c')], (array) $jsonObj);
+        $jsonObj = array_merge(["fetched_at" => now()->format('U')], (array) $jsonObj);
 
         // Store the JSON to be used by the tags and endpoints
         Storage::put('weather-forecast.json', json_encode($jsonObj));
