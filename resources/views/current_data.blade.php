@@ -4,20 +4,44 @@
 
 @section('content')
 
-    <form
-        title="Fetch current Weather"
-        method="post"
-        action="{{ cp_route('weather.data.fetchWeather') }}"
-    >
-        <button class="btn-primary" type="submit">Fetch/update Weather data</button>
-        @csrf
-    </form>
-    @if( ! $json ) 
-        <p><em>No data stored yet</em></p>
+
+    @if( ! $json )
+        <div>
+            <header>
+                <h1 class="mb-2">
+                    No data stored
+                </h1>
+            </header>
+            <div class="card content">
+                <p>
+                    We don't have any data stored yet.
+                </p>
+                <form
+                    title="Fetch current Weather"
+                    method="post"
+                    action="{{ cp_route('weather.data.fetchWeather') }}"
+                >
+                    <button class="btn-primary" type="submit">Fetch/update</button>
+                    @csrf
+                </form>
+            </div>
+        </div>
     @else
-        <div class="flex flex-wrap">
-            <div class="lg:w-3/5 px-2">
-                <h1 class="mt-4">Forecast</h1>
+        <div>
+            <header class="mt-3 mb-2">
+                <div class="flex items-center justify-between">
+                    <h1>Current Data</h1>
+                    <form
+                        title="Fetch current Weather"
+                        method="post"
+                        action="{{ cp_route('weather.data.fetchWeather') }}"
+                    >
+                        <button class="btn-primary" type="submit">Fetch/update</button>
+                        @csrf
+                    </form>
+                </div>
+            </header>
+            <div class="card p-2 content">
                 <table>
                     @foreach($forecast['days'] as $day)
                         <tr>
@@ -46,7 +70,7 @@
                                 {{ $day['pressure'] }}
                                 <span class="text-neutral-700">hPa</span>
                             </td>
-                                
+
                         </tr>
                     @endforeach
                 </table>
@@ -54,19 +78,20 @@
                     Fetched at {{ $forecast['fetched_at'] }}
                 </div>
             </div>
-            <div class="lg:w-2/5 w-full">
-                <h2 class="mt-4">Raw JSON Data</h2>
-                    <div name="textarea">
-                        <textarea 
-                            id="field_textarea" 
-                            class="input-text" 
-                            style="width:100%; overflow-wrap: break-word; height: 450px;"
-                        >{{ $json }}</textarea>
-                    </div>    
+
+            <header class="mt-3 mb-2">
+                <h1>Raw JSON</h1>
+            </header>
+            <div class="card p-2 content">
+                <textarea
+                    id="field_textarea"
+                    class="input-text"
+                    style="width:100%; overflow-wrap: break-word; height: 450px;"
+                >{{ $json }}</textarea>
             </div>
         </div>
     @endif
-    
-    
+
+
 
 @endsection

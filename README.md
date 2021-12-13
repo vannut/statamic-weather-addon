@@ -2,7 +2,7 @@
 
 Display the current weather or a 7-day forecast for any lat/lon on earth.
 
-> Attention: this addon is a work in progress and not production ready yet. Find something broken or missing: please create [an issue](https://github.com/vannut/statamic-weather-addon/issues)!
+> Attention: Find something broken or missing: please create [an issue](https://github.com/vannut/statamic-weather-addon/issues)!
 
 ## OpenWeatherMap
 The weather data itself is coming from the OpenWeatherMap api. Especially the [One-Call API](https://openweathermap.org/api/one-call-api) which delivers all the relevant data in _one call_. And to make it even better: It's free for the first 1,000,000 calls/month (or 60 calls/minute)
@@ -13,9 +13,9 @@ The weather data itself is coming from the OpenWeatherMap api. Especially the [O
 3.  After signing in go to API keys and generate a new one.
 4.  Go to your Statamic Control Panel and look for the Weather entry. It should be in the sidebar.
 5. Fill out the settings-form with your api-key, latitude & longitude
-6. Go to the Command line and perform the first initial fetch of your specific data: `php artisan weather:fetchForecast`
+6. Go to the Current Data page and fetch your first weather forecast!
+6. Or Go to the Command line and perform the first initial fetch of your specific data: `php artisan weather:fetchForecast`
 
-> In a next version this would be this command can be run from the utilities section of statamic.
 
 ## Renewing the forecast
 Nothing is as changeable as the weather. Therefore this addon adds [a hourly call](https://github.com/vannut/statamic-weather-addon/blob/master/src/ServiceProvider.php#L25) to the scheduler of Statamic/Laravel.
@@ -39,10 +39,10 @@ Next to the data provided by the API, the addon adds a couple of nice additional
 You'll have two tags to your disposal: `{{ forecast }}` and `{{ current_weather }}`
 
 ## Simple 7 day forecast
-With the `{{ forecast }}` tag you will be able to display a card per day with the forecast. 
-This data is located in the `days` array which you can traverse and add your styling magic. 
+With the `{{ forecast }}` tag you will be able to display a card per day with the forecast.
+This data is located in the `days` array which you can traverse and add your styling magic.
 
-This is a very simple example: 
+This is a very simple example:
 ```html
 <div class="flex bg-neutral-100">
     {{ forecast :locale="site" }}
