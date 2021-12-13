@@ -98,6 +98,15 @@ Want to display the current weather of your location? Use the `{{ current_weathe
     {{ /current_weather }}
 ```
 
+## Widget
+
+You can add a basic Forecast widget to your CP dashboard, by adding it in your `/config/statamic/cp.php`:
+```php
+'widgets' => [
+    'current_forecast',
+]
+```
+
 ---
 <p>
 <a href="https://statamic.com"><img src="https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge" alt="Compatible with Statamic v3"></a>

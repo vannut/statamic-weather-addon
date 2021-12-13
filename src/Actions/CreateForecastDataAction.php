@@ -12,12 +12,16 @@ class CreateForecastDataAction {
     use ConversionTrait;
 
     public function execute(
-        string $locale
+        string $locale = null
     ) : array {
 
         $config = (new Settings)->get();
         $units = $config->get('units', 'metric');
-        
+        if (!$locale) {
+            $locale = strtolower($config->get('lang', 'en'));
+        }
+
+
         $json = json_decode(Storage::get('weather-forecast.json'), true);
         $daily = collect($json['daily'])
             ->map(function ($item) use ($locale, $units) {

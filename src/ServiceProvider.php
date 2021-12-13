@@ -5,6 +5,7 @@ namespace Vannut\StatamicWeather;
 use Statamic\Facades\CP\Nav;
 use Statamic\Providers\AddonServiceProvider;
 
+
 class ServiceProvider extends AddonServiceProvider
 {
     protected $routes = [
@@ -20,6 +21,11 @@ class ServiceProvider extends AddonServiceProvider
     protected $commands = [
         \Vannut\StatamicWeather\Commands\FetchForecast::class
     ];
+
+    protected $widgets = [
+        \Vannut\StatamicWeather\Widgets\CurrentForecast::class
+    ];
+
     protected function schedule($schedule)
     {
         $schedule->command('weather:fetchForecast')->hourly();
