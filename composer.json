@@ -17,8 +17,9 @@
     },
     "extra": {
         "statamic": {
-            "name": "Weather",
-            "description": "Voeg Weer toe aan Statamic"
+            "name": "Weather Forecast",
+            "description": "Display the current weather or a 7-day forecast for any lat/lon on earth.",
+            "editions": ["free", "coffee"]
         },
         "laravel": {
             "providers": [
