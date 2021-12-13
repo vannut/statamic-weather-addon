@@ -10,6 +10,7 @@ use Vannut\StatamicWeather\Settings;
 use Illuminate\Support\Facades\Artisan;
 use Statamic\Http\Controllers\CP\CpController;
 use Vannut\StatamicWeather\Actions\FetchAndStoreAction;
+use Vannut\StatamicWeather\Actions\CreateForecastDataAction;
 
 class ControlPanelController extends CpController
 {
@@ -19,22 +20,28 @@ class ControlPanelController extends CpController
     {
         $this->settings = new Settings;
     }
+    public function cpIndex() {
+        return redirect()->to(cp_route('weather.data'));
+    }
 
-    public function currentData() 
-    {   
-
+    public function currentData()
+    {
         if (Storage::exists('weather-forecast.json')) {
-            
             $json = json_encode(
                 json_decode(Storage::get('weather-forecast.json')),
                 JSON_PRETTY_PRINT
             );
+            $forecast = (new CreateForecastDataAction)->execute('en');
         } else {
             $json = false;
+            $forecast = false;
         }
 
+
+
         return view('weather::current_data', [
-            'json' => $json
+            'json' => $json,
+            'forecast' => $forecast
         ]);
     }
 
@@ -84,7 +91,7 @@ class ControlPanelController extends CpController
 
     public function fetchWeather()
     {
-        
+
         $success = (new FetchAndStoreAction($this->settings->get()))->execute();
 
         if ($success) {
@@ -93,7 +100,7 @@ class ControlPanelController extends CpController
             Toast::error('Something went wrong');
         }
         return redirect()->back();
-        
+
     }
 
 
