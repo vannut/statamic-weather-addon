@@ -10,6 +10,7 @@ use Vannut\StatamicWeather\Settings;
 use Illuminate\Support\Facades\Artisan;
 use Statamic\Http\Controllers\CP\CpController;
 use Vannut\StatamicWeather\Actions\FetchAndStoreAction;
+use Vannut\StatamicWeather\Actions\CreateForecastDataAction;
 
 class ControlPanelController extends CpController
 {
@@ -24,7 +25,6 @@ class ControlPanelController extends CpController
     {   
 
         if (Storage::exists('weather-forecast.json')) {
-            
             $json = json_encode(
                 json_decode(Storage::get('weather-forecast.json')),
                 JSON_PRETTY_PRINT
@@ -33,8 +33,11 @@ class ControlPanelController extends CpController
             $json = false;
         }
 
+        $forecast = (new CreateForecastDataAction)->execute('en');
+
         return view('weather::current_data', [
-            'json' => $json
+            'json' => $json,
+            'forecast' => $forecast
         ]);
     }
 
