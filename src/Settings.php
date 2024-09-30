@@ -17,96 +17,68 @@ class Settings
         // load the values
         $this->values = $this->retrieveSettingsFromDisk();
 
-        $this->blueprint = Blueprint::makeFromFields([
-                'api_url' => [
-                    'type' => 'text',
-                    'validate' => 'required',
-                    'width' => 100,
-                    'default' => 'https://api.openweathermap.org/data/2.5/',
-                    'placeholder' => 'https://api.openweathermap.org/data/2.5/'
-                ],
-                'api_secret_key' => [
-                    'type' => 'text',
-                    'validate' => 'required',
-                    'width' => 100,
-                ],
-                'lat' => [
-                    'type' => 'text',
-                    'validate' => 'required',
-                    'width' => 50,
-                ],
-                'lon' => [
-                    'type' => 'text',
-                    'validate' => 'required',
-                    'width' => 50,
-                ],
-                'units' => [
-                    'validate' => 'required',
-                    'width' => 50,
-                    'type' => 'select',
-                    'default' => 'metric',
-                    'options' => [
-                        'metric' => 'Metric (Celcius, meter/s)',
-                        'imperial' => 'Imperial (Fahrenheit, miles/hour)',
+        $this->blueprint = Blueprint::make()->setContents([
+            'sections' => [
+                'main' => [
+                    'display' => 'Locations',
+                    'fields' => [
+                        ['handle' => 'locations',  
+                            'field' => [
+                                'type'=>'grid', 
+                                'display'=> 'Locations',
+                                'fields' => [
+                                    ['handle' => 'location_identifier',
+                                        'field' => [
+                                            'type' => 'text',
+                                            'display' => 'Location identifier'
+                                        ]
+                                    ],
+                                    ['handle' => 'lat',
+                                        'field' => [
+                                            'type' => 'text',
+                                            'display' => 'Latitude'
+                                        ]
+                                    ],
+                                    ['handle' => 'lon',
+                                        'field' => [
+                                            'type' => 'text',
+                                            'display' => 'Longitude'
+                                        ]
+                                    ],
+
+                                ]
+                            ]
+                        ]
                     ]
                 ],
-                'lang' => [
-                    'width' => 100,
-                    'type' => 'select',
-                    'default' => 'en',
-                    'options' => [
-                        'af' => 'Afrikaans',
-                        'al' => 'Albanian',
-                        'ar' => 'Arabic',
-                        'az' => 'Azerbaijani',
-                        'bg' => 'Bulgarian',
-                        'ca' => 'Catalan',
-                        'cz' => 'Czech',
-                        'da' => 'Danish',
-                        'de' => 'German',
-                        'el' => 'Greek',
-                        'en' => 'English',
-                        'eu' => 'Basque',
-                        'fa' => 'Persian (Farsi)',
-                        'fi' => 'Finnish',
-                        'fr' => 'French',
-                        'gl' => 'Galician',
-                        'he' => 'Hebrew',
-                        'hi' => 'Hindi',
-                        'hr' => 'Croatian',
-                        'hu' => 'Hungarian',
-                        'id' => 'Indonesian',
-                        'it' => 'Italian',
-                        'ja' => 'Japanese',
-                        'kr' => 'Korean',
-                        'la' => 'Latvian',
-                        'lt' => 'Lithuanian',
-                        'mk' => 'Macedonian',
-                        'no' => 'Norwegian',
-                        'nl' => 'Dutch',
-                        'pl' => 'Polish',
-                        'pt' => 'Portuguese',
-                        'pt_br' => 'Português Brasil',
-                        'ro' => 'Romanian',
-                        'ru' => 'Russian',
-                        'se' => 'Swedish',
-                        'sk' => 'Slovak',
-                        'sl' => 'Slovenian',
-                        'es' => 'Spanish',
-                        'sr' => 'Serbian',
-                        'th' => 'Thai',
-                        'tr' => 'Turkish',
-                        'uk' => 'Ukrainian',
-                        'vi' => 'Vietnamese',
-                        'zh_cn' => 'Chinese Simplified',
-                        'zh_tw' => 'Chinese Traditional',
-                        'zu' => 'Zulu',
-                    ],
-                    'instructions' => 'select your language of choice, default EN',
+                'settings' => [
+                    'display' => 'Settings',
+                    'fields' => [
+                        ['handle' => 'api_secret_key', 
+                            'field' => [
+                                'display' => 'API key',
+                                'validate' => 'required',
+                                'type'=>'text'
+                            ]
+                        ],
+                        ['handle' => 'units', 
+                            'field' => [
+                                'display' => 'Units',
+                                'validate' => 'required',
+                                'type'=>'select',
+                                'default' => 'metric',
+                                'options' => [
+                                    'metric' => 'Metric (Celcius, meter/s)',
+                                    'us' => 'US (Fahrenheit, miles/hour)',
+                                ]
+                            ]
+                        ]
+                    ]
                 ]
-
-
+            ]
         ]);
+                
+       
 
     }
 

@@ -50,11 +50,16 @@ class ControlPanelController extends CpController
 
         // Get an array of values from the item that you want to be populated
         // in the form. eg. ['title' => 'My Product', 'slug' => 'my-product']
-        $values = $this->settings->get()->toArray();
+        $values = $this->settings->get();
+                
+        $values['locations'] = collect($values['locations'])->transform(function ($item) {
+            return (array) $item;
+        })->toArray();
+        
         // Get a Fields object, a representation of the fields in a blueprint
         // that factors in imported fieldsets, config overrides, etc.
         $fields = $this->settings->blueprint->fields()
-            ->addValues($values)
+            ->addValues($values->toArray())
             ->preProcess();
 
         // The vue component will need these three values at a minimum.

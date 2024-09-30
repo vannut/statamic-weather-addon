@@ -1,6 +1,6 @@
 @extends('statamic::layout')
 @section('title', 'Weather settings')
-@section('wrapper_class', 'max-w-md ml-0')
+@section('wrapper_class', 'max-w-lg ml-0')
 
 @section('content')
 
