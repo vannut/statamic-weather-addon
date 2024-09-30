@@ -22,9 +22,7 @@ class ServiceProvider extends AddonServiceProvider
         \Vannut\StatamicWeather\Commands\FetchForecast::class
     ];
 
-    protected $widgets = [
-        \Vannut\StatamicWeather\Widgets\CurrentForecast::class
-    ];
+   
 
     protected function schedule($schedule)
     {
