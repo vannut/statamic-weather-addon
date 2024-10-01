@@ -31,9 +31,13 @@ class FetchAndStoreAction {
                 return false;
             }
 
+            // add the fetch time
+            $jsonObj = array_merge(["fetched_at" => now()->format('U')], (array) $jsonObj);
             
+            
+
             // Store the JSON to be used by the tags and endpoints
-            Storage::put('weather-forecast_'.$location->id.'.json', json_encode($jsonObj));
+            Storage::put('weather-forecast-'.$location->id.'.json', json_encode($jsonObj));
         };
 
         
@@ -50,14 +54,7 @@ class FetchAndStoreAction {
     {
         $lat = str_replace(',','.', $lat);
         $lng = str_replace(',','.', $lng);
-        // $endpoint = $this->config->get('api_url')
-        //     .'onecall?lat='.$this->config->get('lat')
-        //     .'&lon='.$this->config->get('lon')
-        //     .'&exclude=minutely,hourly,alerts'
-        //     .'&units='.$this->config->get('units', 'metric')
-        //     .'&appid='.$this->config->get('api_secret_key')
-        //     .'&lang='.$this->config->get('lang','en');
-        
+     
         $endpoint = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
             ."/".$lat.",".$lng
             ."?key=".$this->config->get('api_secret_key')
