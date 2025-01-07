@@ -6,7 +6,7 @@ Route::namespace('\Vannut\StatamicWeather\Controllers')
     ->group(function () {
 
         Route::get(
-            '/today',
+            '/today/{identifier}',
             'ApiController@today'
         )->name('.today');
 

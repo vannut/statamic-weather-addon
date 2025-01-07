@@ -2,16 +2,40 @@
 
 namespace Vannut\StatamicWeather\Tags;
 
-use Vannut\StatamicWeather\Actions\CreateForecastDataAction;
+use Exception;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
+use Vannut\StatamicWeather\Settings;
+use Vannut\StatamicWeather\Actions\CreateForecastDataFromJsonAction;
 
 class Forecast extends \Statamic\Tags\Tags
 {   
-    // {{ forecast locale="nl" }} {{ /forecast }}
+    // {{ forecast locale="nl"  location-identifier="ddfgg" }} {{ /forecast }}
     public function index(): array
     {
         $locale = strtolower($this->params->get('locale'));
+        $locationIdentifier = $this->params->get('location-identifier');
+        $settings = (new Settings)->get();
+        $fileName = 'weather-forecast-'.$locationIdentifier.'.json';
         
-        return (new CreateForecastDataAction)->execute($locale);
+        if (! Storage::exists($fileName)) {
+            throw new \Exception("Forecast not found", 1);
+        }
         
+        $json = json_decode(Storage::get($fileName), true);
+
+        
+        $data = (new CreateForecastDataFromJsonAction)
+            ->json(
+                $json, 
+                $locale ?? 'en',
+                $settings['units'] ?? 'metric'
+            );
+
+        // remove gthe first day as that is _today_
+        $data['days']->shift();
+        
+        
+        return $data['days']->toArray();
     }
 }

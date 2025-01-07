@@ -53,6 +53,23 @@ trait ConversionTrait {
         else { return 12;}
     }
 
+    private function kphToBft($kph): Int
+    {
+        if ($kph < 1)      { return 0; }
+        else if($kph < 6)  { return 1;}
+        else if($kph < 12)  { return 2;}
+        else if($kph < 20)  { return 3;}
+        else if($kph < 29)    { return 4;}
+        else if($kph < 39)  { return 5;}
+        else if($kph < 50)  { return 6;}
+        else if($kph < 62)  { return 7;}
+        else if($kph < 75)  { return 8;}
+        else if($kph < 89)  { return 9;}
+        else if($kph < 103)  { return 10;}
+        else if($kph < 117)  { return 11;}
+        else { return 12;}
+    }
+
     private function msToBft($ms): Int
     {
         if ($ms < 0.3)      { return 0; }

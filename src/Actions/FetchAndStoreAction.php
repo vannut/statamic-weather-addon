@@ -16,40 +16,51 @@ class FetchAndStoreAction {
     public function execute(): bool 
     {
 
-        $content = $this->talkToOpenweathermap();
+        foreach($this->config['locations'] as $location) {
+            
+            $content = $this->talkToWeatherService($location->lat,$location->lon);
 
-        // Do nothing when we don't get anything back
-        if ($content === false) {
-            return false;
-        }
+            // Do nothing when we don't get anything back
+            if ($content === false) {
+                return false;
+            }
 
-        // Decode the json object, drop out when not a valid object
-        $jsonObj = json_decode($content);
-        if ($jsonObj === null && json_last_error() !== JSON_ERROR_NONE) {
-            return false;
-        }
+            // Decode the json object, drop out when not a valid object
+            $jsonObj = json_decode($content);
+            if ($jsonObj === null && json_last_error() !== JSON_ERROR_NONE) {
+                return false;
+            }
 
-        // add the fetch time
-        $jsonObj = array_merge(["fetched_at" => now()->format('U')], (array) $jsonObj);
+            // add the fetch time
+            $jsonObj = array_merge(["fetched_at" => now()->format('U')], (array) $jsonObj);
+            
+            
 
-        // Store the JSON to be used by the tags and endpoints
-        Storage::put('weather-forecast.json', json_encode($jsonObj));
+            // Store the JSON to be used by the tags and endpoints
+            Storage::put('weather-forecast-'.$location->id.'.json', json_encode($jsonObj));
+        };
+
+        
 
         return true;
 
     }
 
 
-    private function talkToOpenweathermap(): string 
+    private function talkToWeatherService(
+        $lat,
+        $lng
+    ): string 
     {
-        $endpoint = $this->config->get('api_url')
-            .'onecall?lat='.$this->config->get('lat')
-            .'&lon='.$this->config->get('lon')
-            .'&exclude=minutely,hourly,alerts'
-            .'&units='.$this->config->get('units', 'metric')
-            .'&appid='.$this->config->get('api_secret_key')
-            .'&lang='.$this->config->get('lang','en');
-
+        $lat = str_replace(',','.', $lat);
+        $lng = str_replace(',','.', $lng);
+     
+        $endpoint = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
+            ."/".$lat.",".$lng
+            ."?key=".$this->config->get('api_secret_key')
+            ."&unitGroup=".$this->config->get('units', 'metric')
+            ."&iconSet=icons2"
+            ."&include=days,current,alerts";
 
         $headers = [
             'Content-Type:application/json',
