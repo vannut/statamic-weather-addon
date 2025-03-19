@@ -22,8 +22,9 @@ class FetchForecast extends Command
 
     public function handle()
     {
+        
         $settings = (new Settings)->get();
-
+       
         $success = (new FetchAndStoreAction($settings))->execute();
 
     }

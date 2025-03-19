@@ -16,7 +16,9 @@ class FetchAndStoreAction {
     public function execute(): bool 
     {
 
-        foreach($this->config['locations'] as $location) {
+        
+        
+        foreach($this->config['locations'] ?? [] as $location) {
             
             $content = $this->talkToWeatherService($location->lat,$location->lon);
 
@@ -39,7 +41,7 @@ class FetchAndStoreAction {
             // Store the JSON to be used by the tags and endpoints
             Storage::put('weather-forecast-'.$location->id.'.json', json_encode($jsonObj));
         };
-
+        
         
 
         return true;

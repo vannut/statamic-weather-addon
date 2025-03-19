@@ -27,8 +27,8 @@ class ControlPanelController extends CpController
 
     public function currentData(){
         $settings = $this->settings->get();
-        $locations = collect($settings['locations']);
-
+        $locations = collect($settings['locations'] ?? []);
+        
         $locations->transform(function ($location) use ($settings) {
             $fileName = 'weather-forecast-'.$location->id.'.json';
 
@@ -65,7 +65,7 @@ class ControlPanelController extends CpController
         // in the form. eg. ['title' => 'My Product', 'slug' => 'my-product']
         $values = $this->settings->get();
                 
-        $values['locations'] = collect($values['locations'])->transform(function ($item) {
+        $values['locations'] = collect($values['locations'] ?? [])->transform(function ($item) {
             return (array) $item;
         })->toArray();
         
