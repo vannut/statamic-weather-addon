@@ -38,18 +38,18 @@ Next to the data provided by the API, the addon adds a couple of nice additional
 
 You'll have two tags to your disposal: `{{ forecast }}` and `{{ current_weather }}`
 
-## Simple 7 day forecast
+## Simple forecast
 With the `{{ forecast }}` tag you will be able to display a card per day with the forecast.
 It's a loop of different days in the forecast. Typically 7 or 15 days depending on the location.
 
 Make sure you specify from which location you want the forecast: 
 ```html
 <div class="flex bg-neutral-100">
-    {{ forecast :locale="site" location-identifier="xyz123" }}
+    {{ forecast :locale="site" nof-days="4" location-identifier="xyz123" }}
         <div class="rounded-xl bg-white">
             <div class="lining-nums p-4 text-center">
-                {{ datetimeEpoch | iso_format("dddd") }}<br>
-                {{ datetimeEpoch | iso_format("D MMM Y") }}<br>
+                {{ datetimeEpoch | timezone("Europe/Amsterdam") | iso_format("dddd") }}<br>
+                {{ datetimeEpoch | timezone("Europe/Amsterdam") | iso_format("D MMM Y") }}<br>
             </div>
             <div class="pb-4 text-5xl flex justify-center">
                 <i class="fal {{ icon_fa }}"></i>
