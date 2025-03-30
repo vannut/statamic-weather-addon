@@ -4,6 +4,7 @@ namespace Vannut\StatamicWeather\Tags;
 
 use Storage;
 use Illuminate\Support\Collection;
+use Vannut\StatamicWeather\Actions\CreateForecastDataFromJsonAction;
 use Vannut\StatamicWeather\Settings;
 
 class CurrentWeather extends \Statamic\Tags\Tags
@@ -12,27 +13,23 @@ class CurrentWeather extends \Statamic\Tags\Tags
 
     protected static $aliases = ['current_weather'];
 
-    // {{ current_weather }} {{ /current_weather }}
+    
+    // {{ current_weather locale="nl"  location-identifier="ddfgg" }} {{ /current_weather }}
     public function index(): Collection
     {
         $locale = strtolower($this->params->get('locale'));
-        $config = (new Settings)->get();
-        $units = $config->get('units', 'metric');
+        $locationIdentifier = $this->params->get('location-identifier');
+        $settings = (new Settings)->get();
+        $units = $settings['units'] ?? 'metric';
 
-        $json = json_decode(Storage::get('weather-forecast.json'), true);
-        $current = collect($json['current']);
+        $json = json_decode(Storage::get('weather-forecast-'.$locationIdentifier.'.json'), true);
+        $data = (new CreateForecastDataFromJsonAction)
+            ->json(
+                $json, 
+                $locale ?? 'en',
+                $settings['units'] ?? 'metric'
+            );
+        return $data['current'];
 
-        // Enrich
-        $current['icon'] = $this->makeIcon($current['weather']);
-        $current['wind_compass'] = $this->degreeesToWindDirection($current['wind_deg'], $locale);
-        $current['wind_bft'] = ($units === 'metric')
-            ? $this->msToBft($current['wind_speed'])
-            : $this->mphToBft($current['wind_speed']);
-        $current['uvi_color'] = $this->UVIndexToColor($current['uvi']);
-        $current['uvi_percentage'] = $this->UVIndexToPercentage($current['uvi']);
-
-        $current['fetched_at'] = $json['fetched_at'];
-        
-        return $current;
     }
 }

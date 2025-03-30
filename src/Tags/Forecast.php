@@ -10,11 +10,15 @@ use Vannut\StatamicWeather\Actions\CreateForecastDataFromJsonAction;
 
 class Forecast extends \Statamic\Tags\Tags
 {   
-    // {{ forecast locale="nl"  location-identifier="ddfgg" }} {{ /forecast }}
+    // {{ forecast locale="nl"  
+    //        location-identifier="ddfgg"
+    //          nof-days="4" }} 
+    // {{ /forecast }}
     public function index(): array
     {
         $locale = strtolower($this->params->get('locale'));
         $locationIdentifier = $this->params->get('location-identifier');
+        $nofDays = $this->params->get('nof-days', 10);
         $settings = (new Settings)->get();
         $fileName = 'weather-forecast-'.$locationIdentifier.'.json';
         
@@ -36,6 +40,6 @@ class Forecast extends \Statamic\Tags\Tags
         $data['days']->shift();
         
         
-        return $data['days']->toArray();
+        return array_slice($data['days']->toArray(), 0, $nofDays);
     }
 }
