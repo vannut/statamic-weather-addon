@@ -13,7 +13,7 @@ class CurrentWeather extends \Statamic\Tags\Tags
 
     protected static $aliases = ['current_weather'];
 
-    
+
     // {{ current_weather locale="nl"  location-identifier="ddfgg" }} {{ /current_weather }}
     public function index(): Collection
     {
@@ -25,9 +25,9 @@ class CurrentWeather extends \Statamic\Tags\Tags
         $json = json_decode(Storage::get('weather-forecast-'.$locationIdentifier.'.json'), true);
         $data = (new CreateForecastDataFromJsonAction)
             ->json(
-                $json, 
+                $json,
                 $locale ?? 'en',
-                $settings['units'] ?? 'metric'
+                $units
             );
         return $data['current'];
 
