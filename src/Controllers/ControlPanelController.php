@@ -110,13 +110,15 @@ class ControlPanelController extends CpController
     public function fetchWeather()
     {
 
-        $success = (new FetchAndStoreAction($this->settings->get()))->execute();
+        $result = (new FetchAndStoreAction($this->settings->get()))->execute();
 
-        if ($success) {
-            Toast::success('Data updated');
+        if (isset($result['message']) && $result['message'] === 'no-api-key-provided') {
+            Toast::error('There is no API key specified in the environment.');
         } else {
-            Toast::error('Something went wrong');
+            Toast::success('Data updated');
         }
+
+
         return redirect()->back();
 
     }

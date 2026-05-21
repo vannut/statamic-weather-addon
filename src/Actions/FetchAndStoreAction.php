@@ -11,24 +11,35 @@ class FetchAndStoreAction {
         private Collection $config
     )  {}
 
-    public function execute(): bool
+    public function execute(): array
     {
+        $key = config('services.weather.api_key');
 
 
+        if(!$key) {
+            return [
+                'message' => 'no-api-key-provided',
+            ];
+        }
 
-        foreach($this->config['locations'] ?? [] as $location) {
+        $resultForLocations = [];
 
-            $content = $this->talkToWeatherService($location->lat,$location->lon);
+        foreach($this->config['locations'] ?? [] as $location)  {
+
+            $content = $this->talkToWeatherService($location->lat,$location->lon, $key);
 
             // Do nothing when we don't get anything back
             if ($content === false) {
-                return false;
+                $resultForLocations[$location->location_identifier] = 'no-response-from-api';
+                break;
             }
+
 
             // Decode the json object, drop out when not a valid object
             $jsonObj = json_decode($content);
             if ($jsonObj === null && json_last_error() !== JSON_ERROR_NONE) {
-                return false;
+                $resultForLocations[$location->location_identifier] = 'json-parse-error';
+                break;
             }
 
             // add the fetch time
@@ -42,20 +53,19 @@ class FetchAndStoreAction {
 
 
 
-        return true;
+        return $resultForLocations;
 
     }
 
 
     private function talkToWeatherService(
         $lat,
-        $lng
-    ): string
-    {
+        $lng,
+        string $key
+    ): string|array {
+
         $lat = str_replace(',','.', $lat);
         $lng = str_replace(',','.', $lng);
-
-        $key = $this->config->get('api_secret_key');
 
         $endpoint = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
             ."/".$lat.",".$lng

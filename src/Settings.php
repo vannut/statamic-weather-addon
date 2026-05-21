@@ -22,9 +22,9 @@ class Settings
                 'main' => [
                     'display' => 'Locations',
                     'fields' => [
-                        ['handle' => 'locations',  
+                        ['handle' => 'locations',
                             'field' => [
-                                'type'=>'grid', 
+                                'type'=>'grid',
                                 'display'=> 'Locations',
                                 'fields' => [
                                     ['handle' => 'location_identifier',
@@ -54,14 +54,7 @@ class Settings
                 'settings' => [
                     'display' => 'Settings',
                     'fields' => [
-                        ['handle' => 'api_secret_key', 
-                            'field' => [
-                                'display' => 'API key',
-                                'validate' => 'required',
-                                'type'=>'text'
-                            ]
-                        ],
-                        ['handle' => 'units', 
+                        ['handle' => 'units',
                             'field' => [
                                 'display' => 'Units',
                                 'validate' => 'required',
@@ -77,8 +70,8 @@ class Settings
                 ]
             ]
         ]);
-                
-       
+
+
 
     }
 

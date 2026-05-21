@@ -22,11 +22,19 @@ class ServiceProvider extends AddonServiceProvider
         \Vannut\StatamicWeather\Commands\FetchForecast::class
     ];
 
-   
+
 
     protected function schedule($schedule)
     {
         $schedule->command('weather:fetchForecast')->hourly();
+    }
+
+    public function register(): void
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/weather.php',
+            'services'  // merged onder de "services" key
+        );
     }
 
     public function boot()
