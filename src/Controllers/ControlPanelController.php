@@ -15,7 +15,7 @@ use Vannut\StatamicWeather\Actions\CreateForecastDataFromJsonAction;
 
 class ControlPanelController extends CpController
 {
-    public $settings;
+    public Settings $settings;
 
     public function __construct() {
         $this->settings = new Settings;
@@ -28,7 +28,7 @@ class ControlPanelController extends CpController
     public function currentData(){
         $settings = $this->settings->get();
         $locations = collect($settings['locations'] ?? []);
-        
+
         $locations->transform(function ($location) use ($settings) {
             $fileName = 'weather-forecast-'.$location->id.'.json';
 
@@ -37,7 +37,7 @@ class ControlPanelController extends CpController
 
                 $location->data = (new CreateForecastDataFromJsonAction)
                     ->json(
-                        $json, 
+                        $json,
                         $settings['locale'] ?? 'en',
                         $settings['units'] ?? 'metric'
                      );
@@ -48,8 +48,8 @@ class ControlPanelController extends CpController
             return collect($location);
 
         });
-     
-        
+
+
 
 
 
@@ -64,11 +64,11 @@ class ControlPanelController extends CpController
         // Get an array of values from the item that you want to be populated
         // in the form. eg. ['title' => 'My Product', 'slug' => 'my-product']
         $values = $this->settings->get();
-                
+
         $values['locations'] = collect($values['locations'] ?? [])->transform(function ($item) {
             return (array) $item;
         })->toArray();
-        
+
         // Get a Fields object, a representation of the fields in a blueprint
         // that factors in imported fieldsets, config overrides, etc.
         $fields = $this->settings->blueprint->fields()

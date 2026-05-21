@@ -8,18 +8,16 @@ use Illuminate\Support\Collection;
 class FetchAndStoreAction {
 
     public function __construct(
-        Collection $config
-    ) {
-        $this->config = $config;
-    }
+        private Collection $config
+    )  {}
 
-    public function execute(): bool 
+    public function execute(): bool
     {
 
-        
-        
+
+
         foreach($this->config['locations'] ?? [] as $location) {
-            
+
             $content = $this->talkToWeatherService($location->lat,$location->lon);
 
             // Do nothing when we don't get anything back
@@ -35,14 +33,14 @@ class FetchAndStoreAction {
 
             // add the fetch time
             $jsonObj = array_merge(["fetched_at" => now()->format('U')], (array) $jsonObj);
-            
-            
+
+
 
             // Store the JSON to be used by the tags and endpoints
             Storage::put('weather-forecast-'.$location->id.'.json', json_encode($jsonObj));
         };
-        
-        
+
+
 
         return true;
 
@@ -52,14 +50,16 @@ class FetchAndStoreAction {
     private function talkToWeatherService(
         $lat,
         $lng
-    ): string 
+    ): string
     {
         $lat = str_replace(',','.', $lat);
         $lng = str_replace(',','.', $lng);
-     
+
+        $key = $this->config->get('api_secret_key');
+
         $endpoint = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
             ."/".$lat.",".$lng
-            ."?key=".$this->config->get('api_secret_key')
+            ."?key=".$key
             ."&unitGroup=".$this->config->get('units', 'metric')
             ."&iconSet=icons2"
             ."&include=days,current,alerts";
