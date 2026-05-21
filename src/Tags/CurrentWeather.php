@@ -2,7 +2,7 @@
 
 namespace Vannut\StatamicWeather\Tags;
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Vannut\StatamicWeather\Actions\CreateForecastDataFromJsonAction;
 use Vannut\StatamicWeather\Settings;

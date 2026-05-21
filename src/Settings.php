@@ -1,7 +1,7 @@
 <?php
 namespace Vannut\StatamicWeather;
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Statamic\Facades\Blueprint;
 use Illuminate\Support\Collection;
 

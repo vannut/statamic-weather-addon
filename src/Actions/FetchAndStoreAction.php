@@ -2,7 +2,7 @@
 
 namespace Vannut\StatamicWeather\Actions;
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 
 class FetchAndStoreAction {

@@ -2,7 +2,7 @@
 
 namespace Vannut\StatamicWeather\Tags;
 
-use Exception;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Vannut\StatamicWeather\Settings;

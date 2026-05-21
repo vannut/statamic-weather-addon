@@ -2,7 +2,7 @@
 
 namespace Vannut\StatamicWeather\Commands;
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Console\Command;
 use Vannut\StatamicWeather\Settings;
 use Vannut\StatamicWeather\Actions\FetchAndStoreAction;

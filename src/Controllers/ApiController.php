@@ -2,7 +2,7 @@
 
 namespace Vannut\StatamicWeather\Controllers;
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Vannut\StatamicWeather\Settings;
 use Statamic\Http\Controllers\CP\CpController;
 use Vannut\StatamicWeather\Actions\CreateForecastDataFromJsonAction;

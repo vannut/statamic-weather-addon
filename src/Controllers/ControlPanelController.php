@@ -2,7 +2,7 @@
 
 namespace Vannut\StatamicWeather\Controllers;
 
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Statamic\Facades\CP\Toast;
 
